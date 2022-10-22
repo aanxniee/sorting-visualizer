@@ -1,6 +1,4 @@
-import pygame
-import random
-import math
+import pygame, random, math
 
 pygame.init()
 
@@ -8,18 +6,20 @@ screenLength, screenHeight = 600, 300;
 win = pygame.display.set_mode((screenLength, screenHeight)) 
 pygame.display.set_caption("Sorting Algorithm Visualizer")
 
+clock = pygame.time.Clock()
 
-def main():
-    run = True
-    clock = pygame.time.Clock()
+# ------- MAIN GAME LOOP -------
+run = True
 
-    while run:
-        win.fill((0,0,0))
-        clock.tick(100)
+while run:
+    win.fill((0,0,0))
 
-        pygame.display.update()
+    for event in pygame.event.get():
+        # allows the user to close window
+        if event.type == pygame.QUIT:
+            run = False
 
-    pygame.quit()
+    clock.tick(50)
+    pygame.display.update()
 
-if __name__ == "__main__":
-    main()
+pygame.quit()
