@@ -3,8 +3,11 @@ pygame.init()
 
 class base:
     FONT = pygame.font.SysFont('Poppins', 20)
+    BLACK = 0, 0, 0
+    WHITE = 255, 255, 255
+    GREY = 127, 127, 127
     SIDE_PADDING = 120
-    TOP_PADDING = 50
+    TOP_PADDING = 150
 
     def __init__(self, w, h, arr):
         self.width = w
@@ -22,8 +25,18 @@ class base:
         self.barHeight = math.floor((self.height - self.TOP_PADDING) / (self.maxVal - self.minVal))
         self.startingX = self.SIDE_PADDING // 2
 
+def draw(info):
+    info.window.fill(info.BLACK)
+    menu = info.FONT.render("R | S | A | D", 1, info.WHITE)
+    algo = info.FONT.render("B | I | S | M | Q", 1, info.WHITE)
 
-clock = pygame.time.Clock()
+    info.window.blit(menu, (info.width/2 - menu.get_width()/2, 15))
+    info.window.blit(algo, (info.width/2 - algo.get_width()/2, 40))
+
+    #drawBars(info, -1, -1)
+    pygame.display.update()
+
+#def drawBars(info, a, b, c=-1, clr=False):
 
 def generateArray(n, minVal, maxVal):
     arr = []
@@ -40,11 +53,11 @@ minVal, maxVal = 0, 100
 
 sorting = False
 ascending = True
+clock = pygame.time.Clock()
 
 arr = generateArray(n, minVal, maxVal)
 
 while run:
-    win.fill((0,0,0))
 
     for event in pygame.event.get():
         # allows the user to close window
@@ -52,6 +65,6 @@ while run:
             run = False
 
     clock.tick(50)
-    pygame.display.update()
+   
 
 pygame.quit()
