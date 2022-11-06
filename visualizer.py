@@ -67,7 +67,7 @@ def generateArray(n, minVal, maxVal):
 
 # ------- MAIN GAME LOOP -------
 run = True
-n = 20
+n = 30
 minVal, maxVal = 0, 100
 
 sorting = False
@@ -78,7 +78,7 @@ arr = generateArray(n, minVal, maxVal)
 draw_info = base(1000, 800, arr)
 
 while run:
-    clock.tick(100)
+    clock.tick(120)
     draw(draw_info)
     pygame.display.update()
     
@@ -86,8 +86,13 @@ while run:
         # allows the user to close window
         if event.type == pygame.QUIT:
             run = False
-
-    
+        if event.type != pygame.KEYDOWN:
+            continue
+        if event.key == pygame.K_r:
+                arr = generateArray(n, minVal, maxVal)
+                draw_info.set_arr(arr)
+                sorting = False
+            
    
 
 pygame.quit()
