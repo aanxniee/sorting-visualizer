@@ -2,7 +2,7 @@ import pygame, random, math
 pygame.init()
 
 class base:
-    FONT = pygame.font.SysFont('Poppins', 20)
+    FONT = pygame.font.SysFont('Poppins', 50)
     BLACK = 0, 0, 0
     WHITE = 255, 255, 255
     GREY = 127, 127, 127
@@ -31,12 +31,31 @@ def draw(info):
     algo = info.FONT.render("B | I | S | M | Q", 1, info.WHITE)
 
     info.window.blit(menu, (info.width/2 - menu.get_width()/2, 15))
-    info.window.blit(algo, (info.width/2 - algo.get_width()/2, 40))
+    info.window.blit(algo, (info.width/2 - algo.get_width()/2, 60))
 
-    #drawBars(info, -1, -1)
+    drawBars(info, -1, -1)
     pygame.display.update()
 
-#def drawBars(info, a, b, c=-1, clr=False):
+def drawBars(info, a, b, c=-1, clr=False):
+    arr = draw_info.arr
+
+    if clr:
+        rect = (draw_info.SIDE_PADDING//2, draw_info.TOP_PADDING, draw_info.width -
+                draw_info.SIDE_PADDING, draw_info.height)
+        pygame.draw.rect(draw_info.window, draw_info.BLACK, rect)
+
+    for i, val in enumerate(arr):
+        x = draw_info.startingX + (2 * i) * draw_info.barWidth
+        y = draw_info.height - (val - draw_info.minVal +
+                                1) * draw_info.barHeight
+        colour = (209, 146, 175)
+        if i == a or i == b or i == c:
+            colour = draw_info.GREEN
+
+        pygame.draw.rect(draw_info.window, colour, (x, y, draw_info.barWidth, draw_info.height))
+    
+    if clr:
+        pygame.display.update()
 
 def generateArray(n, minVal, maxVal):
     arr = []
