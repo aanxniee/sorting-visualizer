@@ -16,7 +16,7 @@ class base:
         pygame.display.set_caption("Sorting Algorithm Visualizer")
         self.set_arr(arr)
 
-    def set_list(self, arr):
+    def set_arr(self, arr):
         self.arr = arr
         self.minVal = min(arr)
         self.maxVal = max(arr)
@@ -56,15 +56,19 @@ ascending = True
 clock = pygame.time.Clock()
 
 arr = generateArray(n, minVal, maxVal)
+draw_info = base(1000, 800, arr)
 
 while run:
-
+    clock.tick(100)
+    draw(draw_info)
+    pygame.display.update()
+    
     for event in pygame.event.get():
         # allows the user to close window
         if event.type == pygame.QUIT:
             run = False
 
-    clock.tick(50)
+    
    
 
 pygame.quit()
