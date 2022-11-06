@@ -3,9 +3,9 @@ pygame.init()
 
 class base:
     FONT = pygame.font.SysFont('Poppins', 50)
-    BLACK = 0, 0, 0
-    WHITE = 255, 255, 255
-    GREY = 127, 127, 127
+    BLACK = 40, 41, 40
+    WHITE = 217, 212, 195
+    SORTING_COLOUR = 212, 169, 121
     SIDE_PADDING = 120
     TOP_PADDING = 150
 
@@ -48,9 +48,9 @@ def drawBars(info, a, b, c=-1, clr=False):
         x = draw_info.startingX + (2 * i) * draw_info.barWidth
         y = draw_info.height - (val - draw_info.minVal +
                                 1) * draw_info.barHeight
-        colour = (209, 146, 175)
+        colour = (217, 212, 195)
         if i == a or i == b or i == c:
-            colour = draw_info.GREEN
+            colour = draw_info.SORTING_COLOUR
 
         pygame.draw.rect(draw_info.window, colour, (x, y, draw_info.barWidth, draw_info.height))
     
@@ -65,6 +65,16 @@ def generateArray(n, minVal, maxVal):
 
     return arr
 
+def bubbleSort(draw_info, ascending):
+    lst = draw_info.arr
+    clock = pygame.time.Clock()
+    for i in range(len(arr)):
+        for j in range(i + 1, len(lst)):
+            clock.tick(100)
+            if (ascending and lst[i] > lst[j]) or (not ascending and lst[i] < lst[j]):
+                lst[i], lst[j] = lst[j], lst[i]
+            drawBars(draw_info, i, j, -1, True)
+
 # ------- MAIN GAME LOOP -------
 run = True
 n = 30
@@ -76,9 +86,10 @@ clock = pygame.time.Clock()
 
 arr = generateArray(n, minVal, maxVal)
 draw_info = base(1000, 800, arr)
+algorithm = bubbleSort
 
 while run:
-    clock.tick(120)
+    clock.tick(100)
     draw(draw_info)
     pygame.display.update()
     
@@ -89,9 +100,14 @@ while run:
         if event.type != pygame.KEYDOWN:
             continue
         if event.key == pygame.K_r:
-                arr = generateArray(n, minVal, maxVal)
-                draw_info.set_arr(arr)
-                sorting = False
+            arr = generateArray(n, minVal, maxVal)
+            draw_info.set_arr(arr)
+            sorting = False
+        elif event.key == pygame.K_SPACE and sorting == False:
+            sorting = True
+            algorithm(draw_info, ascending)
+        elif event.key == pygame.K_b and not sorting:
+            algo = bubbleSort
             
    
 
