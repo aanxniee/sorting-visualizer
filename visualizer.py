@@ -100,7 +100,7 @@ def selectionSort(draw_info, ascending):
 
 # ------- MAIN GAME LOOP -------
 run = True
-n = 30
+n = 40
 minVal, maxVal = 0, 100
 
 sorting = False
@@ -112,7 +112,7 @@ draw_info = base(1000, 800, arr)
 algorithm = bubbleSort
 
 while run:
-    clock.tick(100)
+    clock.tick(120)
     draw(draw_info)
     pygame.display.update()
     
@@ -130,10 +130,10 @@ while run:
             sorting = True
             algorithm(draw_info, ascending)
         elif event.key == pygame.K_b and not sorting:
-            algo = bubbleSort
+            algorithm = bubbleSort
         elif event.key == pygame.K_i and not sorting:
-            algo = insertionSort
+            algorithm = insertionSort
         elif event.key == pygame.K_s and not sorting:
-            algo = selectionSort
+            algorithm = selectionSort
             
 pygame.quit()
