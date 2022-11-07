@@ -98,6 +98,27 @@ def selectionSort(draw_info, ascending):
             drawBars(draw_info, idx, j, -1, True)
         arr[i], arr[idx] = arr[idx], arr[i]
 
+def quickSort(draw_info, ascending):
+    quickSortRange(draw_info, ascending, 0, len(draw_info.arr))
+
+def quickSortRange(draw_info, ascending, start, end):
+    arr = draw_info.arr
+
+    if end<= start:
+        return
+
+    pos = end-1
+    clock =pygame.time.Clock()
+    for i in range(end-1, start, -1):
+        clock.tick(150)
+        if (ascending and arr[i]>arr[start]) or (not ascending and arr[i] < arr[start]):
+            arr[pos], arr[i] = arr[i], arr[pos]
+            pos -=1
+        drawBars(draw_info, start, i, pos, True)
+        arr[pos], arr[start] = arr[start], arr[pos]
+    quickSortRange(draw_info, ascending, start, pos)
+    quickSortRange(draw_info, ascending, pos + 1, end)
+
 # ------- MAIN GAME LOOP -------
 run = True
 n = 40
@@ -135,5 +156,7 @@ while run:
             algorithm = insertionSort
         elif event.key == pygame.K_s and not sorting:
             algorithm = selectionSort
+        elif event.key == pygame.K_q and not sorting:
+            algorithm = quickSort
             
 pygame.quit()
