@@ -66,14 +66,37 @@ def generateArray(n, minVal, maxVal):
     return arr
 
 def bubbleSort(draw_info, ascending):
-    lst = draw_info.arr
+    arr = draw_info.arr
     clock = pygame.time.Clock()
     for i in range(len(arr)):
-        for j in range(i + 1, len(lst)):
-            clock.tick(100)
-            if (ascending and lst[i] > lst[j]) or (not ascending and lst[i] < lst[j]):
-                lst[i], lst[j] = lst[j], lst[i]
+        for j in range(i + 1, len(arr)):
+            clock.tick(150)
+            if (ascending and arr[i] > arr[j]) or (not ascending and arr[i] < arr[j]):
+                arr[i], arr[j] = arr[j], arr[i]
             drawBars(draw_info, i, j, -1, True)
+
+def insertionSort(draw_info, ascending):
+    arr = draw_info.arr
+    clock = pygame.time.Clock()
+    for i in range(len(arr)):
+        for j in range(i, 0, -1):
+            clock.tick(50)
+            if (ascending and arr[j] < arr[j - 1]) or (not ascending and arr[j] > arr[j - 1]):
+                arr[j], arr[j - 1] = arr[j - 1], arr[j]
+            drawBars(draw_info, j, j - 1, -1, True)
+
+def selectionSort(draw_info, ascending):
+    arr = draw_info.arr
+    clock = pygame.time.Clock()
+    idx = 0
+    for i in range(len(arr)):
+        idx = i
+        for j in range(i, len(arr)):
+            clock.tick(150)
+            if (ascending and arr[j] < arr[idx]) or (not ascending and arr[j] > arr[idx]):
+                idx = j
+            drawBars(draw_info, idx, j, -1, True)
+        arr[i], arr[idx] = arr[idx], arr[i]
 
 # ------- MAIN GAME LOOP -------
 run = True
@@ -108,7 +131,9 @@ while run:
             algorithm(draw_info, ascending)
         elif event.key == pygame.K_b and not sorting:
             algo = bubbleSort
+        elif event.key == pygame.K_i and not sorting:
+            algo = insertionSort
+        elif event.key == pygame.K_s and not sorting:
+            algo = selectionSort
             
-   
-
 pygame.quit()
