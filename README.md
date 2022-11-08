@@ -13,7 +13,7 @@ Sorted array:
 <img width="979" alt="image" src="https://user-images.githubusercontent.com/63011927/200666471-9d8fcd0e-1a2f-4b65-ac80-0e3338da9e2e.png">
 
 Test runs:
-https://user-images.githubusercontent.com/63011927/200668611-afb99175-b52d-46ea-a9c7-e8097272f698.mov
+https://user-images.githubusercontent.com/63011927/200669547-f979cea4-7921-41e2-883a-d08b956850d9.mov
 
 1) Bubble sort (ascending)
 2) Selection sort (descending)
