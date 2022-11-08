@@ -211,6 +211,10 @@ while run:
         elif event.key == pygame.K_SPACE and sorting == False:
             sorting = True
             algorithm(draw_info, ascending)
+        elif event.key == pygame.K_a and not sorting:
+            ascending = True
+        elif event.key == pygame.K_d and not sorting:
+            ascending = False
         elif event.key == pygame.K_b and not sorting:
             algorithm = bubbleSort
         elif event.key == pygame.K_i and not sorting:
