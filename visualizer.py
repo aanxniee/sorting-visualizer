@@ -119,6 +119,67 @@ def quickSortRange(draw_info, ascending, start, end):
     quickSortRange(draw_info, ascending, start, pos)
     quickSortRange(draw_info, ascending, pos + 1, end)
 
+def merge(draw_info, arr, arr1, arr2, ascending):
+    x1 = x2 =0
+    clock = pygame.time.Clock()
+    for pos in range(len(arr1)+len(arr2)):
+        clock.tick(100)
+        temp = arr
+        p1=p2=-1
+        list1=True
+        if x1 == len(arr1) or (x2 < len(arr2) and ((ascending and arr2[x2] < arr1[x1]) or (not ascending and arr2[x2] > arr1[x1]))):
+            arr[pos] = arr2[x2]
+            x2 += 1
+            list1 = False
+        else:
+            arr[pos] = arr1[x1]
+            x1 += 1
+        for i in range(len(arr)):
+            if arr[i] != temp[i]:
+                if p1 == -1:
+                    p1 = i
+                else:
+                    p2 = i
+        drawBars(draw_info, p1, p2, -1, True)
+        if list1:
+            x1 += 1
+        else:
+            x2 += 1
+    return arr
+
+def merge(draw_info, arr, arr1, arr2, ascending, start):
+    x1 = x2 = 0
+    frames = pygame.time.Clock()
+    for pos in range(len(arr1) + len(arr2)):
+        frames.tick(150)
+        if x1 == len(arr1) or (x2 < len(arr2) and ((ascending and arr2[x2] < arr1[x1]) or (not ascending and arr2[x2] > arr1[x1]))):
+            arr[pos] = arr2[x2]
+            x2 += 1
+            drawBars(draw_info, pos + start, len(arr1) + start + x2, -1, True)
+        else:
+            arr[pos] = arr1[x1]
+            drawBars(draw_info, pos + start, start + x1, -1, True)
+            x1 += 1
+    return arr
+
+def mergeSort(draw_info, ascending):
+    mergeSortHelper(draw_info, draw_info.arr, ascending, 0)
+
+def mergeSortHelper(draw_info, arr, ascending, start):
+    if len(arr) == 1:
+        return
+    left = len(arr) // 2
+    right = len(arr) - left
+    left_list = []
+    right_list = []
+    for i in range(left):
+        left_list.append(arr[i])
+    for i in range(right):
+        right_list.append(arr[i + left])
+    mergeSortHelper(draw_info, left_list, ascending, start)
+    mergeSortHelper(draw_info, right_list, ascending, start + len(arr) // 2)
+    arr = merge(draw_info, arr, left_list, right_list, ascending, start)
+
 # ------- MAIN GAME LOOP -------
 run = True
 n = 40
@@ -158,5 +219,7 @@ while run:
             algorithm = selectionSort
         elif event.key == pygame.K_q and not sorting:
             algorithm = quickSort
+        elif event.key == pygame.K_m and not sorting:
+            algorithm = mergeSort
             
 pygame.quit()
