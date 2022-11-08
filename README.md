@@ -1,6 +1,6 @@
 # 📊 Sorting Algorithm Visualizer
 
-Sorting Algorithm Visualizer using Python and Pygame. Allows users to sort a random array in ascending/descending using bubble sort, selection sort, insertion sort, merge sort, and/or quick sort.
+Sorting Algorithm Visualizer using Python and Pygame. Allows users to sort a random array in ascending/descending using bubble sort, insertion sort, selection sort, merge sort, and/or quick sort.
 
 
 Unsorted array:
@@ -17,6 +17,6 @@ Test runs:
 https://user-images.githubusercontent.com/63011927/200669547-f979cea4-7921-41e2-883a-d08b956850d9.mov
 
 1) Bubble sort (ascending)
-2) Selection sort (descending)
-3) Insertion sort (ascending)
+2) Insertion sort (descending)
+3) Selection sort (ascending)
 4) Merge sort (ascending)
